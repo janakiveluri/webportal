@@ -1,7 +1,10 @@
 from django import forms
-from models import Contributor , Reviewer, Class, Subject ,Comment, Language
+from models import Contributor , Reviewer, Class
+from models import Subject ,Comment, Language, Contact
 from django.contrib.auth.models import User
 from webapp.models import Contributor
+from django.contrib import messages
+
 
 class ContactForm(forms.ModelForm):
     name = forms.CharField(
@@ -17,11 +20,10 @@ class ContactForm(forms.ModelForm):
                                      'placeholder': 'Please write your message*.',
                                      'rows': 4}),
         help_text="Please write your message.", required=True)
-    captcha = ReCaptchaField(attrs={'theme': 'clean'})
     
     class Meta:
         model = Contact
-        fields = ['name', 'email', 'message', 'captcha']
+        fields = ['name', 'email', 'message']#, 'captcha']
 
 
 class UserForm(forms.ModelForm):
@@ -155,6 +157,14 @@ class ContributorUploadForm(forms.ModelForm):
 
     SUMMARY: This is the summary given by the contributor about the specified topic of the specified subject including when to use and how to use.
     """
+    language = forms.ModelChoiceField(
+	label='Language',
+	cache_choices=True,
+	widget=None,
+	queryset=Language.objects.all(),
+	empty_label=None,
+	help_text="",required=True,
+        error_messages={'required':'Language is required'})
     class_number = forms.ModelChoiceField(
 	label='Class',
 	cache_choices=True,
@@ -178,8 +188,8 @@ class ContributorUploadForm(forms.ModelForm):
         widget = forms.FileInput(),
         help_text = 'Upload pdf file.',required=False)
     video = forms.FileField(
-        label = 'video file.', 
-        help_text = 'Upload video file.',required=False)
+        label = 'video file.',
+	help_text = 'Upload video file.',required=False)
     animation = forms.FileField(
         label = 'animations file.',
         widget = forms.FileInput(),
@@ -188,33 +198,54 @@ class ContributorUploadForm(forms.ModelForm):
 	widget= forms.Textarea(
         attrs={'class': 'form-control','placeholder': 'Summary for the uploaded documents.'}),
 	help_text="", required=True,
-	error_messages={'required':'Summary is required.'})       	
+	error_messages={'required':'Summary is required.'})  
+     	
     class Meta:
         model = Subject
-        fields = ['class_number', 'name','topic', 'pdf', 'video', 'animation', 'summary']
+        fields = ['language','class_number', 'name','topic', 'pdf', 'video', 'animation', 'summary']
     
-    def clean_pdf_doc_file(self):
+    def clean_pdf(self):
         """Upload a valid ."""
+	print "Hey welcome"
         if self.cleaned_data['pdf']:
             pdf= self.cleaned_data['pdf']
-            return pdf
-        else:
-	    raise forms.ValidationError("Not a valid file!")
+	    print pdf.content_type.split('/')[1]
+	    if pdf.content_type.split('/')[1] == "pdf":
+	    	if pdf._size/(1024*1024) <= 20: # < 20MB
+                	return pdf
+		
+            	else:
+			raise forms.ValidationError("Filesize should be less than 20MB.")
+            else:
+	    	raise forms.ValidationError("Not a valid file, Please upload a pdf file!")
 
-    def clean_video_doc_file(self):
+    def clean_video(self):
       	"""Limit doc_file upload size."""
+	print "yoyo"
         if self.cleaned_data['video']:
+	    print "hey"
             video= self.cleaned_data['video']
-            return video
-        else:
-	    raise forms.ValidationError("Not a valid file!")
-    def clean_animations_doc_file(self):
+            if video.content_type.split('/')[1] in ("mp4", "x-matroska", "x-msvideo", "x-flv"):
+        	if video._size/(1024*1024) <= 200: # < 100MB 
+                	return video
+		
+            	else:
+                	raise forms.ValidationError("Filesize should be less than 200MB.")
+	    else:
+	    	raise forms.ValidationError("Not a valid file, Please Upload a mp4, mkv, avi or flv file")
+
+    def clean_animation(self):
         """Limit doc_file upload size."""
         if self.cleaned_data['animation']:
             animation= self.cleaned_data['animation']
-            return animation
-	else:
-	    raise forms.ValidationError("Not a valid file!")
+	    if animation.content_type.split('/')[1] == "x-shockwave-flash":
+        	if animation._size/(1024*1024) <= 10: # < 10MB
+                	return animation
+		
+            	else:
+                	raise forms.ValidationError("Filesize should be less than 10MB.")
+	    else:
+	    	raise forms.ValidationError("Not a valid file, Please Upload .swf file!")
 
 
 class CommentForm(forms.ModelForm):

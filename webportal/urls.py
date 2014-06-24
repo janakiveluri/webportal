@@ -10,7 +10,7 @@ urlpatterns = patterns(
     '',
     url(r'^$','webapp.views.index'),
     url(r'^webapp/', include('webapp.urls')),
-    # url(r'^user/', include('django.contrib.auth.urls')),
+    # url(r'^user/', include('django.contrib.auth.urls'),
     url(r'^about/$', 'webapp.views.about', name='about'),
     url(r'^contributor/profile/edit/$', 'webapp.views.contributor_profile_edit',),
     
@@ -57,6 +57,7 @@ urlpatterns = patterns(
 
     # this is used to display the content page of either the contributor or the reviewer
     url(r'^content/(?P<lang>[\w ]+)/$','webapp.views.content'),
+    # this is used for selecting language of the contents
     url(r'^language/$','webapp.views.language_select'),
     
 
@@ -65,7 +66,6 @@ urlpatterns = patterns(
     
     url(r'^search/(?P<lang>[\w ]+)/$','webapp.views.search'),
     url(r'^contact/$', 'webapp.views.contact'),
-
 )
 
 
