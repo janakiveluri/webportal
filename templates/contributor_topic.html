@@ -12,7 +12,8 @@
  			{% if uploads %}
 				<div class="table-responsive">
 				<table class="table table-hover" id="uploads">
-				 <tr class="success">
+				
+				 <tr class="active">
     				    <td><strong>subject</strong></td>
     				    <td><strong>Topic</strong></td>
 			            <td><strong>Summary</strong></td>
@@ -20,7 +21,7 @@
 				    <td><strong>Video</strong></td>
 				    <td><strong>animation</strong></td>
 					
-  				 </tr>
+  				 </tr></div>
   				{% for i in uploads %}
 				 <tr class="active">
 		
@@ -43,25 +44,32 @@
 				    
 				    {% if i.pdf %}
 				   
-				      <a href="/media/{{i.pdf}}"><i class="fa fa-file-pdf-o fa-2x"></i></a>
-			            {% else %}
+				      <a href="/media/{{i.pdf}}" target="blank"><i class="fa fa-file-pdf-o fa-2x"></i></a>
+			            {% else %}<i class="fa fa-ban fa-2x"></i>
 				    {% endif %}	</td><td>
 				    {% if i.video %}
-					<a href="/media/{{i.video}}"><i class="fa fa-file-video-o fa-2x"></i></a>
-					{% else %}
+					<a href="/media/{{i.video}}" target="blank"><i class="fa fa-file-video-o fa-2x"></i></a>
+					{% else %}<i class="fa fa-ban fa-2x"></i>
 				    {% endif %}	</td><td>
 				    {% if i.animation %}
-					<a href="/media/{{i.animation}}"><i class="fa fa-file-image-o fa-2x"></i></a>
+					<a href="/media/{{i.animation}}" target="blank"><i class="fa fa-file-image-o fa-2x"></i></a>
 					
-				    {% else %}
+				    {% else %}<i class="fa fa-ban fa-2x"></i>
 				    {% endif %}	
 				       
 				</td>         
 				  </tr>
 				
 			         {% endfor %}
-				</table></div>
-			        </div>
+				</table>
+                                 <ul class="pagination" id="unordered-code-list"></ul> 
+				{% else %}
+  				<p>Nothing to display.</p>
+  				{% endif %}
+                                 
+                            
+    		
+			        </div></div>
                                  
                                 
 
@@ -86,13 +94,9 @@
 				
                             </div>
 
-<ul class="pagination" id="unordered-code-list"></ul> 
-				{% else %}
-  				<p>Nothing to display.</p>
-  				{% endif %}
-    			</div>
+	</div>
   </div>
-   </div>
+ 
 
 
 <script src="{% static 'js/paging.js' %}"></script>

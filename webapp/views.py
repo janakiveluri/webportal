@@ -10,10 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 # import the models here
 from django.contrib.auth.models import User
-from webapp.models import Contributor, Reviewer, Subject
-from webapp.models import Comment, Language, Class
-
-
+from webapp.models import Contributor, Reviewer, Subject ,Comment, Language,Class
 # import the forms here
 from webapp.forms import ContributorForm, ReviewerForm, UserForm
 from webapp.forms import ContactForm, ContributorUploadForm, CommentForm
@@ -139,6 +136,25 @@ page.
         else:
             return render_to_response('webapp/login.html', context)
 
+def password_change(request):
+    context = RequestContext(request)
+    user = User.objects.get(username=request.user.username)
+    if request.method == 'POST':
+        if user.check_password(request.POST['old_pwd']):
+            if request.POST['new_pwd'] == request.POST['new_again_pwd']:
+                user.set_password(request.POST['new_pwd'])
+		user.save()
+                messages.success(request, "Password Changed")
+		return render_to_response('password_change.html',context)
+            else:
+                messages.error(request, "Passwords doesn't match")
+		return render_to_response('password_change.html',context)		
+        else:
+            messages.error(request, "Incorrect Password")
+	    return render_to_response('password_change.html',context)
+    else:
+        return render_to_response('password_change.html', context)
+    
 
 def contributor_profile(request):
     """
@@ -278,6 +294,27 @@ specific class.
     }
     return render_to_response('contributor_topic_detail.html',
                               context_dict, context)
+
+def topic(request,class_num,sub,topics,id):
+    """
+    Arguments:
+
+    `REQUEST`: Request from user.
+
+    `CLASS_NUM` : Class in which the logged in contributor has contributed.
+
+    `SUB` : Subject in which the logged in contributor has contributed.
+
+    `TOPICS` : Subject topic in which the logged in contributor has contributed.
+
+    `ID` : Id of the subject in which the logged in contributor has contributed.
+
+    This function takes the request of user and direct it to profile page which consists of details of a specified topic of a subject of a specific class.
+    """
+    context = RequestContext(request)
+    subject = Subject.objects.get(id=id)
+    context_dict = {'subject': subject, 'class_num':class_num, 'sub':sub,'topics':topics,'id':id}
+    return render_to_response('topic.html', context_dict, context)
 
 
 def reviewer_profile_topic_detail(request, class_num, sub, topics, id):
@@ -706,7 +743,6 @@ def contributor_profile_edit(request):
             contributor.user = User.objects.get(username=user.username)
             contributor.save()
             messages.success(request, "Profile updated successfully.")
-            return render_to_response("edit_success.html", context)
         else:
             if contributorform.errors or userform.errors:
                 print contributorform.errors, userform.errors
@@ -755,7 +791,6 @@ def reviewer_profile_edit(request):
             reviewer.user = User.objects.get(username=user.username)
             reviewer.save()
             messages.success(request, "Profile updated successfully.")
-            return render_to_response("edit_success.html", context)
         else:
             if reviewerform.errors or userform.errors:
                 print reviewerform.errors, userform.errors
@@ -835,12 +870,17 @@ def search(request, lang):
         return HttpResponse(response)
 
 
-def edit_success(request):
-    """
-    Argument:
+def detail_user(request):
+   """
+   Argument:
 
-    `request`: This function redirects the page to edit_success.html page.
-
-    Editing user's/Reviewer's profile is successful.
-    """
-    return render_to_response('edit_success.html')
+   `request`: This function redirects to the page having detailed information of contributor and reviewer
+   """
+   context = RequestContext(request)
+   contributor = Contributor.objects.all()
+   print contributor[0].picture
+   reviewer = Reviewer.objects.all()
+   context_dict = {'contributor': contributor,
+                   'reviewer': reviewer,
+		  }
+   return render_to_response('detail_user.html',context_dict,context)

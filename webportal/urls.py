@@ -40,8 +40,7 @@ urlpatterns = patterns(
     
 
     # this is for changing password, and for confirmation of that change
-    url(r'^user/password/change/$','django.contrib.auth.views.password_change'),
-    url(r'^user/password/change/done/$','django.contrib.auth.views.password_change_done'),
+    url(r'^user/password/change/$','webapp.views.password_change'),
 
     # this is for resetting password by sending an email, when a user forgets password
     url(r'^admin/password_reset/$','django.contrib.auth.views.password_reset',name='admin_password_reset'),
@@ -56,7 +55,11 @@ urlpatterns = patterns(
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # this is used to display the content page of either the contributor or the reviewer
+
+    url(r'^content/(?P<class_num>\d+)/(?P<sub>[\w ]+)/(?P<topics>[\w ]+)/(?P<id>\d+)/$','webapp.views.topic'),
+
     url(r'^content/(?P<lang>[\w ]+)/$','webapp.views.content'),
+    url(r'^user_detail/$','webapp.views.detail_user'),
     # this is used for selecting language of the contents
     url(r'^language/$','webapp.views.language_select'),
     
