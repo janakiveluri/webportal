@@ -496,6 +496,30 @@ which consists of the reviewer's past approvals.
                               context_dict, context)
 
 
+def topic(request, class_num, sub, topics, id):
+    """
+    Arguments:
+
+    `request`: Request from user.
+
+    `class_num`: Class in which the logged in contributor has contributed.
+
+    `sub`: Subject in which the logged in contributor has contributed.
+
+    `topics`: Subject topic in which the logged in contributor has contributed.
+
+    `id`: Id of the subject in which the logged in contributor has contributed.
+
+    This function takes the request of user and direct it to profile page which
+consists of details of a specified topic of a subject of a specific class.
+    """
+    context = RequestContext(request)
+    subject = Subject.objects.get(id=id)
+    context_dict = {'subject': subject, 'class_num': class_num,
+                    'sub': sub, 'topics': topics, 'id': id}
+    return render_to_response('topic.html', context_dict, context)
+
+
 def contributor_signup(request):
     """
     Argument:
@@ -851,23 +875,23 @@ def search(request, lang):
         user = User.objects.get(username=request.user.username)
     except:
         user = None
-        query = request.GET['q']
-        filter_query = Subject.objects.filter(topic__icontains=query)
-        filter_lang = filter_query.filter(language__language=lang)
-        filter_review = filter_lang.filter(review__gte=3)
-        results_topic = filter_review.order_by('class_number')
-        filter_query = Subject.objects.filter(name__icontains=query)
-        filter_lang = filter_query.filter(language__language=lang)
-        filter_review = filter_lang.filter(review__gte=3)
-        results_name = filter_review.order_by('class_number')
-        template = loader.get_template('search.html')
-        context = Context({'query': query,
-                           'results_topic': results_topic,
-                           'results_name': results_name,
-                           'lang': lang,
-                           'user': user})
-        response = template.render(context)
-        return HttpResponse(response)
+    query = request.GET['q']
+    filter_query = Subject.objects.filter(topic__icontains=query)
+    filter_lang = filter_query.filter(language__language=lang)
+    filter_review = filter_lang.filter(review__gte=3)
+    results_topic = filter_review.order_by('class_number')
+    filter_query = Subject.objects.filter(name__icontains=query)
+    filter_lang = filter_query.filter(language__language=lang)
+    filter_review = filter_lang.filter(review__gte=3)
+    results_name = filter_review.order_by('class_number')
+    template = loader.get_template('search.html')
+    context = Context({'query': query,
+                       'results_topic': results_topic,
+                       'results_name': results_name,
+                       'lang': lang,
+                       'user': user})
+    response = template.render(context)
+    return HttpResponse(response)
 
 
 def detail_user(request):
