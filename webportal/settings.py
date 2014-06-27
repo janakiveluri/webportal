@@ -22,22 +22,21 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': secret.DB_ENGINE, # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': secret.DB_NAME,                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3' # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'webportal.db',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
 
-        'USER': secret.DB_USER,
-        'PASSWORD': secret.DB_PASSWORD,
+        'USER': '',
+        'PASSWORD': '',
 
-
-        'HOST': secret.DB_HOST,                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': secret.DB_PORT,                      # Set to empty string for default.
+        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '',                      # Set to empty string for default.
     }
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = secret.ALLOWED_HOST_LIST
+ALLOWED_HOSTS = ['localhost','127.0.0.1']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
