@@ -1,6 +1,7 @@
 # Django settings for webportal project.
 
 import os
+import secret
 
 SETTINGS_DIR = os.path.dirname(__file__)
 PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
@@ -10,7 +11,7 @@ STATIC_PATH = os.path.join(PROJECT_PATH, 'static')
 # templates PATH
 TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 
-DEBUG = True
+DEBUG = secret.DEBUG_VALUE
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -27,7 +28,7 @@ DATABASES = {
 
         'USER': secret.DB_USER,
         'PASSWORD': secret.DB_PASSWORD,
-        
+
 
         'HOST': secret.DB_HOST,                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': secret.DB_PORT,                      # Set to empty string for default.
@@ -142,6 +143,9 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'webapp',
 )
+
+RECAPTCHA_PUBLIC_KEY=secret.RECAPTCHA_PUBLIC_KEY_VALUE
+RECAPTCHA_PRIVATE_KEY=secret.RECAPTCHA_PRIVATE_KEY_VALUE
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
