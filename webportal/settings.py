@@ -138,10 +138,14 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    'captcha',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'webapp',
 )
+
+RECAPTCHA_PUBLIC_KEY=secret.RECAPTCHA_PUBLIC_KEY_VALUE
+RECAPTCHA_PRIVATE_KEY=secret.RECAPTCHA_PRIVATE_KEY_VALUE
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
