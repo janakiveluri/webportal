@@ -8,7 +8,7 @@ Introduction
 
 - Aakash School Education is committed to offering the students free
   access to its many academic resources. We seek to capitalize on the
-  potential of the internet to eliminate borders and geographic
+  potential of the Internet to eliminate borders and geographic
   distance as obstacles to the instantaneous exchange of knowledge and
   new ideas. Unlike distance learning programs that charge tuition,
   provide formal instruction and limit participation, we offer all
@@ -20,7 +20,7 @@ Introduction
   degree-granting or certificate-granting activity rather it is
   instead an effort to share knowledge and make sure the students have
   access to world class education content making full use of the
-  Internet's potential.
+  Internets potential.
 
 - The main purpose of creating web Application is to initialize
   task,it is an important part of the process. It requires putting
@@ -135,7 +135,7 @@ Advantage of using python over other programming languages
   speed and efficiency.
 
 - Git allows groups of people to work on the same documents (often
-  code) at the same time, and without stepping on each other's toes.
+  code) at the same time, and without stepping on each others toes.
 
 - GitHub is now the largest online storage space of collaborative
   works that exists in the world.
@@ -218,7 +218,7 @@ WorkFlow
  *In this website the various models used :*
 
 - User: This model stores the details of all the users, that is,
-  contribuotrs and reviewers, of the website. The details include
+  contributors and reviewers, of the website. The details include
   their username, first name, last name, password, email.
 
 - Contributor: A contributor is an user of the website who can sign up
@@ -270,9 +270,9 @@ WorkFlow
 
 - Contact: Non-user can give their suggestions on the different
   contents or request for new contents. He/she can send their
-  name,email id and message in order to contact the adminstrator.
+  name,email id and message in order to contact the administrator.
 
-- Faq: Faq consists of fields like questions and answers. It describes
+- FAQ: FAQ consists of fields like questions and answers. It describes
   the frequently asked questions and answers by users.
 
 - Language: Non-user can view the content in different languages
@@ -644,7 +644,7 @@ Conclusion
 - Another benefit of taking online tutorials, and probably the most
   popular one, would be that it offers flexibility to
   students. Because they can attend classes and courses whenever and
-  wherever there is a computer and access to the internet, they can
+  wherever there is a computer and access to the Internet, they can
   easily plan out a schedule that would work for them.
 
 - Online learning allows a more student-centered teaching
@@ -669,7 +669,7 @@ Conclusion
 
 
 Reference
-=======
+=========
 - `<https://www.djangoproject.com/>`_
 
 - `<http://www.tangowithdjango.com/>`_
