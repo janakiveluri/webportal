@@ -36,15 +36,18 @@ Introduction
   language.It’s designed to be easy to learn, read and program.
 
 - Python is open.
+
   - Python is open source software, distributed under a liberal
     license, and can thus be distributed freely.
 
 - Python is general purpose.
+
   - Python is a general purpose language, which means that many things
     are made easy. Examples are string processing, reading/writing
     files, sockets, websites, databases, GUI’s.
 
 - Python is dynamic.
+
   - Being a dynamic language means that new code can be executed
     during runtime without limitations.
 
@@ -250,23 +253,27 @@ WorkFlow
   subject. The date on which the comments are submitted are also noted
   along with the reviewer details.
 
-   - Every user who logs in must be either a contributor or reviewer.
-   - If the person who logs in, is a reviewer he/she can just see the
-     materials but cannot modify the data. He can see the comments
-     given by the reviewers but can not comment.
-   - If the person who logs in, is a contributor he will be given
-     permission to upload contents for the website. The contributor
-     can see the comments given by the reviewers.
-   - If the person who logs in, is a reviewer he will be given
-     permission to review the uploaded content of the contributor and
-     comment on it.
-   - Reviewer doesn't have the permission to upload any files.
-   - An upload will be available to the non-user if and only if it is
-     approved by atleast 3 reviewers.
-   - A non-user can search the study materials based on the subject
-     name or topic.
-   - A non-user may download the files which is pdf, video or
-     animation files.
+- Topic: The user should mention the particular topic of a selected
+  subject. The topic is stored in the database.
+
+  - Every user who logs in must be either a contributor or reviewer.
+  - If the person who logs in, is a reviewer he/she can just see the
+    materials but cannot modify the data. He can see the comments
+    given by the reviewers but can not comment.
+  - If the person who logs in, is a contributor he will be given
+    permission to upload contents for the website. The contributor can
+    see the comments given by the reviewers.
+  - If the person who logs in, is a reviewer he will be given
+    permission to review the uploaded content of the contributor and
+    comment on it.
+  - Reviewer doesn't have the permission to upload any files.
+  - An upload will be available to the non-user if and only if it is
+    approved by atleast 3 reviewers.
+  - A non-user can search the study materials based on the subject
+    name or topic.
+  - A non-user may download the files which is pdf, video or animation
+    files.
+
 
 - Contact: Non-user can give their suggestions on the different
   contents or request for new contents. He/she can send their
@@ -283,19 +290,16 @@ Interface
 
 **User Interface**
 
-  User Interface for the "WebPortal" application begins with the
-homepage of the portal, showing the recent uploads, number of
-classes,subjects and uploads. It also have links to the Contact Us,
-Content, Register(dropdown of contributor/reviewer), Login and more
-pages which includes a dropdown of the Docs, About us and details of
-the users.  Once a person is logged in, the login button changes to
-his username and a dropdown comes on clicking his username, which
-takes him to his profile or enables him to logout.
+- User Interface for the "WebPortal" application begins with the
+  homepage of the portal, showing the recent uploads, number of
+  classes,subjects and uploads. It also have links to the Contact
+  Us,Content, Register(dropdown of contributor/reviewer), Login and
+  morepages which includes a dropdown of the Docs, About us and
+  details of the users.  Once a person is logged in, the login button
+  changes to his username and a dropdown comes on clicking his
+  username, whichtakes him to his profile or enables him to logout.
 
-
-
-  ``Example:``
-*
+  ``Example:`` 
 
 .. figure:: _static/img/homepage.png
    :height: 700 px
@@ -306,7 +310,6 @@ takes him to his profile or enables him to logout.
 
    Home page (without logging in)
 
-*
 .. figure:: _static/img/homepage1.png
    :height: 700 px
    :width: 1000 px
@@ -316,14 +319,10 @@ takes him to his profile or enables him to logout.
 
    Home page (after logging in)
 
-
-
-
 **Contact Us**
   
   Clicking on this link redirects a user to a new page with a contact
   us form using which the user can contact the site administrators.
-
 
   ``Example:``
 
